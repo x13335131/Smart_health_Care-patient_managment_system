@@ -1,0 +1,82 @@
+<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<div class="container">
+	<div class="index-form">
+		<div class="jumbotron">
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <%= devise_error_messages! %>
+  
+  <div class="field">
+    <%= f.label :fname %><br />
+    <%= f.text_field :fname, autofocus: true, autocomplete: "fname", id: :patient_fname, class: "form-control", placeholder: "Enter firstname", style: ' margin:0 auto; width: 20%;'%>
+  </div>
+
+  <div class="field">
+    <%= f.label :lname %><br />
+    <%= f.text_field :lname, autofocus: true, autocomplete: "lname", id: :patient_sname, class: "form-control", placeholder: "Enter surname", style: ' margin:0 auto; width: 20%;' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :username %><br />
+    <%= f.text_field :username, autofocus: true, autocomplete: "username", id: :patient_username, class: "form-control", placeholder: "Enter username", style: ' margin:0 auto; width: 20%;'  %>
+  </div>
+
+ <div class="field">
+    <%= f.label :birthday %><br />
+    <%= f.date_field :birthday, autofocus: true, autocomplete: "birthday", id: :patient_bdy, class: "form-control", style: ' margin:0 auto; width:20%'  %>
+  </div>
+
+<div id='popup'>
+    <h5>Clinic Codes</h5>
+    <ol>
+      <li>Glasnevin Family Practice</li>
+      <li>Sligo clinic</li>
+      <li>Dundrum Medical center</li>  
+      <li>Ardaravan Clinic</li> 
+      <li>Mullingar Millmount Medical Center</li>  
+      <li>The Merdian Clinic</li>
+    </ol>
+  </div>
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", id: :patient_email, class: "form-control", placeholder: "Enter email", style: ' margin:0 auto; width: 20%;'  %>
+  </div>
+  <div class="field">
+    <%= f.label :clinic_id %><br />
+    <%= f.number_field :clinic_id, in: 1...7, autofocus: true, autocomplete: "clinic_id", required: true, id: :clinic_id, class: "form-control", placeholder: "Clinic code", style: 'margin:0 auto; width: 15%;'%>
+  </div>
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+    <%= f.password_field :password, autocomplete: "off" %>
+    <% if @minimum_password_length %>
+      <br />
+      <em><%= @minimum_password_length %> characters minimum</em>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "off", id: :patient_cpassword, class: "form-control", placeholder: "Enter confirm password", style: ' margin:0 auto; width: 20%;'  %>
+  </div>
+
+  <div class="field">
+    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+    <%= f.password_field :current_password, autocomplete: "off", id: :patient_password, class: "form-control", placeholder: "Enter password", style: ' margin:0 auto; width: 20%;'  %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Update" %>
+  </div>
+<% end %>
+
+<h3>Cancel my account</h3>
+
+<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+
+<%= link_to "Back", :back %>
+</div>
+</div>
+</div>

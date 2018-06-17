@@ -1,0 +1,76 @@
+<h2>Sign up</h2>
+<div class="container">
+	<div class="index-form">
+		<div class="jumbotron">
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
+
+<div class="field">
+    <%= f.label :firstname %><br />
+    <%= f.text_field :fname, autofocus: true, autocomplete: "fname", required: true, id: :f_name, class: "form-control", placeholder: "Enter first Name", style: ' margin:0 auto; width: 20%;'%>
+  </div></br>
+  
+  <div class="field" >
+    <%= f.label :lastname %><br />
+    <%= f.text_field :lname, autofocus: true, autocomplete: "lname", required: true, id: :s_name, class: "form-control", placeholder: "Enter last Name", style: ' margin:0 auto; width: 20%;' %>
+  </div></br>
+
+  <div class="field">
+    <%= f.label :username %><br />
+    <%= f.text_field :username, autofocus: true, autocomplete: "username", required: true, id: :user_name, class: "form-control", placeholder: "Username", style: ' margin:0 auto; width: 20%;' %>
+  </div></br>
+
+ <div class="field">
+    <%= f.label :birthday %><br />
+    <%= f.date_select :birthday, autofocus: true, autocomplete: "birthday", required: true, :start_year=>1900, :end_year=>2018, id: :patient_dob, class: "form-control", style: ' margin:0 auto;' %>
+  </div></br>
+<div id='popup'>
+    <h5>Clinic Codes</h5>
+    <ol>
+      <li>Glasnevin Family Practice</li>
+      <li>Sligo clinic</li>
+      <li>Dundrum Medical center</li>  
+      <li>Ardaravan Clinic</li> 
+      <li>Mullingar Millmount Medical Center</li>  
+      <li>The Merdian Clinic</li>
+    </ol>
+  </div>
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true, id: :email, class: "form-control", placeholder: "Email", style: 'margin:0 auto; width: 20%;'%>
+  </div></br>
+  
+   <div class="field">
+    <%= f.label :clinic_id %><br />
+    <!--<%= select_tag(:clinic_id, options_for_select(Clinic.all.map{ |c| [c.name,c.id]}), :prompt => "Select Clinic")%>-->
+          
+    <%= f.number_field :clinic_id, in: 1...7, autofocus: true, autocomplete: "clinic_id", required: true, id: :clinic_id, class: "form-control", placeholder: "Clinic code", style: 'margin:0 auto; width: 15%;'%>
+  </div>
+  
+  </br>
+  <div class="field">
+    <%= f.label :password %></br>
+    <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %><br />
+    <%= f.password_field :password, autocomplete: "off", required: true, id: :password, class: "form-control", placeholder: "Password", style: ' margin:0 auto; width: 20%;' %>
+  </div></br>
+
+  <div class="field">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "off", required: true, id: :cpassword, class: "form-control", placeholder: "Confirm password", style: ' margin:0 auto; width: 20%;' %>
+  </div></br>
+
+  <div class="actions"></br></br>
+    <%= f.submit "Sign up" , :class=>"btn btn-info", :method => :get%>
+  </div>
+<% end %>
+
+<%= render "devise/shared/links" %>
+
+<%= button_to "Back", root_path, :style=>"float:left;", :class=>"btn btn-info", :method => :get %>
+</br>
+</br>
+    </div>
+  </div>
+</div>

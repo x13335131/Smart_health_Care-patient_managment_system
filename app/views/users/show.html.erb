@@ -1,0 +1,40 @@
+<h1>Dr. <%= full_name %></h1>
+<h3><%= @user.username %> </h3>
+<h3>Todays Date: <%= Date.today %> </h3>
+<h3><%= @user.clinic.name%></h3>
+<h5><%= link_to 'Edit your information', edit_user_registration_path %></h5>
+<h2>My Patients</h2>
+<hr class=hrLineHead />
+
+	<div class="index-form" >
+		<div class="jumbotron" >
+          <table id="patients_table">
+            <tr>
+                <th><%= sortable "fname" %></th><th><%= sortable "sname" %></th><th><%= sortable "dob" %></th><th><%= sortable "address" %></th><th>Phone_no</th><th><%= sortable "infection" %></th><th><%= sortable "injury" %></th><th>observations</th>
+            </tr>
+            
+             <% @user_patients.each do |patient| %> <!--for each patient print the following info -->
+                 <tr>
+                     <td> <%= patient.fname %> </td><td> <%= patient.sname %> </td><td> <%= patient.dob %> </td><td> <%= patient.address %></td><td>0<%= patient.phone_no %></td>
+                     <td><%= patient.infection %> </td><td> <%= patient.injury %> </td><td> <%= patient.observations %> </td> <td><%= link_to 'View', patient %></td>
+                     <td><%= link_to 'Edit', edit_patient_path(patient) %></td> <td><%= link_to 'Delete', patient, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                 </tr>
+            <% end %>
+          </table>
+        </div>
+        <%= link_to 'View all patients', patients_path %> <!--link to view all patients on the database--> </br>
+         <%= link_to 'View all doctors', users_path %>
+  </div>
+
+<br>
+<br>
+<br>
+<br>
+
+<h2>Add a patient:</h2>
+<div>
+<hr class=hrLineHead />
+<!--creating a new patient-->
+		  <% if user_signed_in? %>
+		  		<%= render 'patients/newform' %>
+	       	<% end %>

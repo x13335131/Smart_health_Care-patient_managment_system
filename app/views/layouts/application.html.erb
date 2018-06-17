@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MediApp</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script>
+    	
+    	 $(document).ready(function() {
+    $('#clinic_id').hover(function() {
+            $('#popup').show();
+        }, function() {
+        $('#popup').hide();
+    });
+});
+    	
+    </script>
+   
+  </head>
+
+  <body>
+	
+	<!--template for app--->
+    <nav class="navbar navbar-default">
+		  	<div class="container">
+		  		<div class="navbar-header"> <!--top left logo/link--->
+		  			<%= link_to "Medi Health App", root_path, class: "navbar-brand"%>
+		  		</div>
+		  		
+        		 <ul class="nav navbar-nav navbar-right" style=" margin-left: 500px; float: right;"><!--top right of nav sign in/out--->
+        		 	
+         	    	  <% if user_signed_in? %> <!--if user is signed in--->
+		  					<li><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li><!--show sign out link--->
+		  		    	<% else %> 
+		  					<li><%= link_to  "Login", new_user_session_path %></li><!--show login link--->
+		  		  	<% end %>
+				  </ul>
+				  
+		  		<div id="top_right"><!--top far right of nav condition drop down--->
+         			<% if user_signed_in? %> 
+       					<div class="dropdown">
+							  <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							    Sort by Condition
+							  </button>
+				 			  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" >
+			  					<% Condition.all.each do |condition| %> <!--listing conditions--->
+					  				<a class="<%= 'active' if params[:condition] == condition.name %>" >
+					  				<%= link_to condition.name, patients_path(condition: condition.name), class: "dropdown-item" %> </a>
+					  			<% end %> 
+			 				 </div>
+						</div>
+		  			<% end %> <!--closing user sign in if statement-->
+	     		 </div>
+		  	</div>
+  		</nav> <!--close template tag--->
+  	<p class="notice"><%= notice %></p>
+  	<p class="alert"><%= alert %></p>
+
+    <%= yield %>
+  </body>
+</html>

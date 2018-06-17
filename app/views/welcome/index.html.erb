@@ -1,0 +1,25 @@
+<!--landing page--->
+ <h1 class=mainTitle>Welcome to MediApp</h1>
+  <div id="summary">
+	  <% if !user_signed_in? %> <!--if user is NOT signed in show --->
+        <p><i>A new system developed for clinicians to store patient data that can be accessed by any registered clinic in the country. 
+        The application is a straight forward, easy to use system that will help reduce your workload with its search and filtering functionalities
+        as well as a patient referral letter generator .</i></p>
+   <% end %> 
+ <hr class=hrLine> 
+ 
+    <div id="index_btn">
+      <ul class="nav navbar-nav">
+          <% if user_signed_in? %> <!--if user is signed in show profile btn--->
+	           <li><%= button_to "Your Profile", user_path(current_user), :class=>"btn btn-info", :method => :get%></li>
+	    	<% else %> <!--if user is not signed in show reg btn--->
+		  		<li><%= button_to "Register User", new_user_registration_path, :class=>"btn btn-info", :method => :get %></li>
+        	<% end %>
+   	</ul>
+		  		
+    </div><br>
+   
+   </div>
+ <div id="index_img">
+     <%= image_tag("med1.jpg", height: '100%', width: '100%') %>
+ </div>

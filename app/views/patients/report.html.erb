@@ -1,0 +1,55 @@
+<div class="btn-group">
+<%= button_to 'this weeks appointments', patients_report_path(:input=>'weeklyapt'), :class=>"btn_reports", :method => :post %>
+    
+    <%= button_to 'monthly report', patients_report_path(:input=>'monthly'), :class=>"btn_reports", :method => :post %>
+    <%= button_to 'weekly report', patients_report_path(:input=>'weekly'), :class=>"btn_reports", :method => :post %>
+    <%= button_to 'daily report', patients_report_path(:input=>'daily'), :class=>"btn_reports", :method => :post %>
+   
+</div>
+
+	<div class="index-form">
+		<div class="jumbotron">
+		     <table class="data_table">
+       <thead>
+           
+<% if @patients.present? %>
+    <tr>
+      <th>Fname</th>
+      <th>Sname</th>
+      <th>Dob </th>
+      <th>Address</th>
+      <th>Phone no</th>
+      <th>Condition</th>
+      <th>Doctor</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+   <% @patients.each do |patient| %>
+
+  
+        <td><%= patient.fname %></td>
+        <td><%= patient.sname %></td>
+        <td><%= patient.dob %></td>
+        <td><%= patient.address %></td>
+        <td><%= patient.phone_no %></td>
+        <td><%= patient.condition.name %></td>
+         <td><%= patient.user.fname %></td>
+        <td><%= link_to 'Report', patient %></td>
+        <td><%= link_to 'Edit', edit_patient_path(patient) %></td>
+        <td><%= link_to 'Destroy', patient, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+       <% end %>
+      </tbody>
+    </table>
+   
+<% else %>
+  <p>There are no patients containing the term(s) <%= params[:search] %>.</p>
+<% end %>
+<%= @myreport %>
+<br>
+<%= link_to 'New Patient', new_patient_path %>
+    </div><br>
+    <%= link_to 'Return to user profile', user_path(current_user)%>
+  </div>

@@ -1,0 +1,64 @@
+<h5>Current Patient</h5>
+
+<table id="add_patients_table">
+    <tr>
+       <td class="left-col"><strong>First Name:</strong></td>
+       <td> <%= @patient.fname %></td>
+    </tr>
+    <tr>
+       <td class="left-col"> <strong>Surname:</strong></td>
+       <td> <%= @patient.sname %></td>
+    </tr>
+    <tr>
+       <td class="left-col"> <strong>Dob:</strong></td>
+       <td> <%= @patient.dob %> </td>
+    </tr>
+    <tr>
+       <td class="left-col"><strong>Address:</strong></td>
+       <td> <%= @patient.address %></td>
+    </tr>
+    <tr>
+      <td class="left-col"><strong>Phone no:</strong></td>
+      <td><%= @patient.phone_no %></td>
+    </tr>
+    <tr>
+      <td class="left-col"><strong>Infection:</strong></td>
+      <td><%= @patient.infection %> </td>
+    </tr>
+    <tr>
+      <td class="left-col"><strong>Injury:</strong></td>
+      <td> <%= @patient.injury %></td>
+    </tr>
+    <tr>
+     <td class="left-col"><strong>Observations:</strong></td>
+     <td> <%= @patient.observations %> </td>
+    </tr>
+    <tr>
+     <td class="left-col"><strong>Visited:</strong></td>
+     <td><%= @patient.visited %></td>
+    </tr>
+    <tr>
+     <td class="left-col"><strong>next_apt:</strong></td>
+     <td><%= @patient.next_apt %></td>
+    </tr>
+    <tr>
+     <td class="left-col"><strong>Condition:</strong></td>
+     <td><%= @patient.condition.name %></td>
+    </tr>
+</table>
+
+<hr>
+<% if @result %>
+ <p>medical attention required</p>
+    <%= link_to "printable referral form (PDF)", patient_path(@patient, format: "pdf", type: "refer") %>
+
+<% else %>
+ <p>No medical attention required</p> 
+<% end %>
+</br>
+<%= link_to "printable receipt (PDF)", patient_path(@patient, format: "pdf", type: "receipt") %>
+
+</br>
+</br>
+<%= link_to 'Edit Patient', edit_patient_path(@patient) %> |
+<%= link_to 'Return to user profile', user_path(current_user) %>

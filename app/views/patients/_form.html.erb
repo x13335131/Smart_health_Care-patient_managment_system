@@ -1,0 +1,85 @@
+  <%= form_with(model: patient, local: true)do |form| %>
+   <% if patient.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(patient.new.errors.count, "error") %> prohibited this patient from being saved:</h2>
+
+      <ul>
+        <% patient.new.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <div class="container">
+  	<div class="index-form">
+		  <div class="jumbotron">
+		    
+		    <!--PATIENT FORM -->
+          <div class="field">
+            <%= form.label :firstname %>
+            <%= form.text_field :fname, required: true, autocomplete: "fname", class: "form-control", placeholder: "Enter firstname", style: ' margin:0 auto; width: 20%;'%>
+          </div>
+        
+          <div class="field">
+            <%= form.label :surname %>
+            <%= form.text_field :sname, required: true, id: :patient_lname, class: "form-control", placeholder: "Enter surname",  style: ' margin:0 auto; width: 20%;' %>
+          </div>
+        
+          <div class="field">
+            <%= form.label :dob %><br>
+            <%= form.date_select :dob, required: true, :start_year=>1900, :end_year=>2018, id: :patient_dob, class: "form-control",  style: ' margin:0 auto;' %>
+          </div>
+        
+          <div class="field">
+            <%= form.label :address %>
+            <%= form.text_area :address,  style: ' margin:0 auto; width: 20%;', required: true, id: :patient_address, class: "form-control", placeholder: "Enter address" %>
+          </div>
+        
+          <div class="field">
+            <%= form.label :phone_no %>
+            <%= form.number_field :phone_no, minlength: 2 , maxlength: 10 , required: true, id: :patient_lname, class: "form-control",  style: ' margin:0 auto; width: 20%; ' %>
+          </div>
+        
+          <div class="field">
+            <%= form.label :infection %>
+            <%= form.text_field :infection, required: true, id: :patient_infection, class: "form-control", placeholder: "Enter infection",  style: ' margin:0 auto; width: 20%;' %>
+          </div>
+        
+          <div class="field">
+            <%= form.label :injury %>
+            <%= form.text_field :injury, required: true, id: :patient_injury, class: "form-control", placeholder: "Enter injury",  style: ' margin:0 auto; width: 20%;' %>
+          </div>
+        
+          <div class="field">
+            <%= form.label :observations %>
+            <%= form.text_area :observations, required: true, id: :patient_observations, class: "form-control", placeholder: "Enter any observations",  style: ' margin:0 auto; width: 20%;'  %>
+          </div>
+          
+          <div class="field">
+            <%= form.label :visited %></br>
+            <%= form.date_select :visited, required: true, :start_year=>1900, :end_year=>2018, id: :patient_visited, class: "form-control",  style: ' margin:0 auto;' %> </div>
+         
+          <div class="field">
+            <%= form.label :next_apt %></br>
+            <%= form.date_select :next_apt, required: true, :start_year=>1900, :end_year=>2018, id: :patient_next_apt, class: "form-control",  style: ' margin:0 auto;' %> </div>
+          
+          <div class="field">
+            <%= form.label :condition %></br>
+           <%= select_tag(:condition_id, options_for_select(@presenter.conditions, @patient.condition_id),required: true, id: :patient_condition_id, class: "form-control", style: ' margin:0 auto; width: 20%;' ) %>
+          </div></br>
+          
+          <div class="actions">
+            <%= form.submit "save" %>
+          </div>
+          
+      </div><!--end of jumbotron div-->
+      <%= link_to 'Show patient information', @patient %> |
+      <%= link_to 'Return to user profile', user_path(current_user)%>
+
+     </div> <!--end of index-form div-->
+
+   </div><!--end of container div-->
+  <%end%>
+  
+
